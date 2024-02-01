@@ -6,7 +6,7 @@ const config = {
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}', 
 	],
   prefix: "",
   theme: {
