@@ -1,16 +1,16 @@
-'use client'
+
 
 import Link from 'next/link'
 import React from 'react'
 import { Plus } from 'lucide-react'
 import Image from 'next/image'
 import Archive from '@/components/archive'
-import { UserButton, useUser } from '@clerk/nextjs'
+import { UserButton, currentUser } from '@clerk/nextjs'
 
 
 
-export default function Page() {
-    const { isSignedIn, user } = useUser();
+export default async function Page() {
+    const user = await currentUser();
 
 
     return (
@@ -26,7 +26,7 @@ export default function Page() {
                     <Link href={'/'}>Home</Link>
                  </li>
   
-             {isSignedIn || user ? 
+             {!user ? 
                   <UserButton /> :
                    <button className='bg-gradient-to-r from-violet-900 to-purple-500 hover:bg-violet-600 text-white px-3 rounded-sm py-2 '>
                     <Link href={'/login'}>Login</Link>
@@ -46,7 +46,7 @@ export default function Page() {
                       <div className='flex items-start gap-8 flex-col'>
                         {/**CREATE BUTTON HERE */}
                        <div className='flex flex-col gap-2'>
-                          <button disabled={!isSignedIn || !user} className={`${!isSignedIn || !user ? 'bg-gray-500' : 'bg-[#4B3F94] hover:bg-violet-700'} text-center w-[50px] h-[50px] sm:w-[80px] sm:h-[80px] duration-200 ease-in-out text-white rounded-md text-[18px]`} type='button'>
+                          <button disabled={!user} className={`${!user ? 'bg-gray-500' : 'bg-[#4B3F94] hover:bg-violet-700'} text-center w-[50px] h-[50px] sm:w-[80px] sm:h-[80px] duration-200 ease-in-out text-white rounded-md text-[18px]`} type='button'>
                             <Plus 
                               size={32}
                               className='m-auto'
@@ -57,7 +57,7 @@ export default function Page() {
   
   
                           {/**ARCHIVES LISTS */}
-                         {isSignedIn || user ?
+                         {user ?
                           <div className='border scroll-auto w-auto min-w-full max-w-[1180px] min-h-[700px]'>
                                 {/**archive items */}
                                 <div className='h-auto w-fit min-w-max'>

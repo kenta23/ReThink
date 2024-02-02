@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { Button } from "./ui/button";
 import { SignedIn, SignedOut, useClerk } from "@clerk/nextjs";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation"; 
 import { Menu } from "lucide-react";
 import {
   Popover,
@@ -30,8 +30,8 @@ const Navbar = () => {
   return (
     <nav
       className={`w-full flex py-2 justify-between items-center ${
-         pathname.includes("/login") ||
-         pathname.includes("/register")
+         pathname?.includes("/login") ||
+         pathname?.includes("/register")
           ? "hidden"
           : "flex"
       }`}
